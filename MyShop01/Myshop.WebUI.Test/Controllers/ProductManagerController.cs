@@ -4,16 +4,19 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Myshop.Core.Models;
+using Myshop.Core.ViewModels;
 using Myshop.DataAccess.InMemory;
 
 namespace Myshop.WebUI.Test.Controllers
 {
     public class ProductManagerController : Controller
     {
-        ProductRepository context;
+        ProductRepository context; //Load product from the database
+        ProductCategoryRepository productCategories;//Load productCategories from the database
         public  ProductManagerController()
-        { //create a new instance
+        { //create a new instance(initialize)
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
         }
         // GET: Manager
         //主頁面
@@ -23,9 +26,11 @@ namespace Myshop.WebUI.Test.Controllers
             return View(products);
         }
         public ActionResult Create()
-        {
-            Product product = new Product();
-            return View(product);
+        { // return product with a list
+            ProductManagerViewModel viewModel = new ProductManagerViewModel(); // reference this Model
+            viewModel.Product = new Product();
+            viewModel.productCategories = productCategories.Collection();
+            return View(viewModel);
         }
         [HttpPost]
         public ActionResult Create(Product product)
@@ -51,7 +56,10 @@ namespace Myshop.WebUI.Test.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.productCategories = productCategories.Collection();
+                return View(viewModel);
             }
         }
         [HttpPost]
@@ -68,7 +76,7 @@ namespace Myshop.WebUI.Test.Controllers
                 {
                     return View(product);
                 }
-                productToEdit.Catagoery = product.Catagoery;
+                productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
                 productToEdit.Image = product.Image;
                 productToEdit.Name = product.Name;
