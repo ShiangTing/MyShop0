@@ -10,10 +10,10 @@ namespace Myshop.WebUI.Test.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        ProductCategoryRepository context; //Load product from the database
+        InMemoryRepository<ProductCategory>  context; //Load product from the database
         public ProductCategoryManagerController()
         { //create a new instance
-            context = new ProductCategoryRepository();
+            context = new InMemoryRepository<ProductCategory>();
         }
         // GET: Manager
         //主頁面
