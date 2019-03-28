@@ -4,12 +4,12 @@ using System.Linq;
 using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
-
+using Myshop.Core.Contracts;
 using Myshop.Core.Models;
 
 namespace Myshop.DataAccess.InMemory
 {   // <> is a place holder, it can be placed in anything.
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         // Internal list of product/product catagory

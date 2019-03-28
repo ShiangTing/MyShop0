@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Myshop.Core.Contracts;
 using Myshop.Core.Models;
 using Myshop.DataAccess.InMemory;
 
@@ -10,10 +11,10 @@ namespace Myshop.WebUI.Test.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        InMemoryRepository<ProductCategory>  context; //Load product from the database
-        public ProductCategoryManagerController()
+        IRepository<ProductCategory> context; //Load product from the database
+        public ProductCategoryManagerController(IRepository<ProductCategory> context)
         { //create a new instance
-            context = new InMemoryRepository<ProductCategory>();
+           this.context = context;
         }
         // GET: Manager
         //主頁面
