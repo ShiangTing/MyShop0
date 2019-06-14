@@ -19,18 +19,19 @@ namespace Myshop.WebUI.Test.Controllers
             context = productContext;
             productCategories = productCategoryContext;
         }
-        public ActionResult Index(string Categoery =null)
+        public ActionResult Index(string Category =null)
 
         { // 增加product list
             List<Product> products;
             List<ProductCategory> categories = productCategories.Collection().ToList();
-            if (Categoery == null)
+            if (Category == null)
             {
+                
                 products = context.Collection().ToList();
             }
             else
             {
-                products = context.Collection().Where(p => p.Category == Categoery).ToList();
+                products = context.Collection().Where(p => p.Category == Category).ToList();
             }
             ProductListViewModels models = new ProductListViewModels();
             models.Products = products;

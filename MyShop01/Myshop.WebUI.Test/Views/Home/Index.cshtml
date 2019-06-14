@@ -37,7 +37,7 @@
                 <p>@item.Price</p>
             </div>
             <div class="col-md-12">
-                <a herf="#" class="btn btn-default">Add to Basket</a>
+                <a herf="@Url.Action("AddToBasket","Basket",new { Id = item.Id })" class="btn btn-default">Add to Basket</a>
             </div>
 
         </div>

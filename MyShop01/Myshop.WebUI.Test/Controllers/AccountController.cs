@@ -8,6 +8,8 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Myshop.Core.Contracts;
+using Myshop.Core.Models;
 using Myshop.WebUI.Test.Models;
 
 namespace Myshop.WebUI.Test.Controllers
@@ -17,15 +19,18 @@ namespace Myshop.WebUI.Test.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IRepository<Customer> customerRepository;
 
-        public AccountController()
+        //public AccountController()
+        //{
+        //}
+        //用Unity注入 取回註冊方法
+        public AccountController( IRepository<Customer> customerRepository)
         {
-        }
-
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            //ApplicationUserManager userManager, ApplicationSignInManager signInManager 
+            this.customerRepository = customerRepository;
+            //UserManager = userManager;
+            //SignInManager = signInManager;
         }
 
         public ApplicationSignInManager SignInManager
@@ -155,6 +160,19 @@ namespace Myshop.WebUI.Test.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    Customer customer = new Customer
+                    {
+                        City = model.City,
+                        Phone = model.Phone,
+                        Name = model.Name,
+                        State = model.State,
+                        Street = model.Street,
+                        Email = model.Email,
+                      UserId = user.Id //上面的user
+                    };
+                    customerRepository.Insert(customer);
+                    customerRepository.Commit();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // 如需如何進行帳戶確認及密碼重設的詳細資訊，請前往 https://go.microsoft.com/fwlink/?LinkID=320771
