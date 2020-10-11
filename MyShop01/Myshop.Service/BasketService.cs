@@ -80,7 +80,7 @@ namespace Myshop.Service
                 {
                     BasketId = basket.Id,
                     ProductId = productId,
-                    Quanity = 1
+                    Quanity = 1   
                 };
 
                 basket.BasketItems.Add(item);
