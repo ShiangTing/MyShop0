@@ -8,7 +8,7 @@ namespace Myshop.Core.Models
 {
     public class Basket :BaseEntity
     {
-        // Load all BasketItems (virtual ICollection)
+        // Load all BasketItems (virtual ICollection) lazy loading
         public virtual ICollection<BasketItem> BasketItems { get; set; }
         public Basket()
         {

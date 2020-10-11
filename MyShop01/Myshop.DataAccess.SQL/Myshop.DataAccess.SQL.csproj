@@ -69,13 +69,21 @@
     <Compile Include="Migrations\201906140622257_AddName.Designer.cs">
       <DependentUpon>201906140622257_AddName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906140715365_AddOrderandorderitems.cs" />
+    <Compile Include="Migrations\201906140715365_AddOrderandorderitems.Designer.cs">
+      <DependentUpon>201906140715365_AddOrderandorderitems.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Myshop.Core\Myshop.Core.csproj">
@@ -98,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906140622257_AddName.resx">
       <DependentUpon>201906140622257_AddName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906140715365_AddOrderandorderitems.resx">
+      <DependentUpon>201906140715365_AddOrderandorderitems.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
