@@ -12,7 +12,7 @@ namespace Myshop.Service
     public class OrderService : IOrderService
     {
         private IRepository<Order> orderContext;
-
+        public string a;
         public OrderService(IRepository<Order> orderContext)
         {
             this.orderContext = orderContext;
