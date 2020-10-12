@@ -13,6 +13,7 @@ namespace Myshop.Service
     {
         private IRepository<Order> orderContext;
         public string a;
+        public string b;
         public OrderService(IRepository<Order> orderContext)
         {
             this.orderContext = orderContext;
